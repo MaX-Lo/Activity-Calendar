@@ -1,52 +1,17 @@
 import json
-import logging
-import os
-from typing import Optional, List
+from typing import List, Dict
 
 from flask import Flask, request, send_from_directory
 from flask_cors import CORS
 
+import file_handler as fh
+
 app = Flask(__name__)
 CORS(app)
 
-DATA_DIR = './data'
-ACTIVITIES_FN = "activities.json"
-CATEGORIES_FN = "categories.json"
 
-logging.getLogger('flask_cors').level = logging.DEBUG
-
-
-def save(file_name: str, data: str):
-    if not os.path.exists(DATA_DIR):
-        os.mkdir(DATA_DIR)
-    with open(f'{DATA_DIR}/{file_name}', 'w') as f:
-        f.write(data)
-
-
-def read(file_name: str) -> Optional[str]:
-    if not os.path.exists(f'{DATA_DIR}/{file_name}'):
-        return
-
-    with open(f'{DATA_DIR}/{file_name}', 'r') as f:
-        return ''.join(f.readlines())
-
-
-def load_categories() -> List:
-    categories_str = read(CATEGORIES_FN)
-    if not categories_str:
-        categories_str = '[]'
-    return json.loads(categories_str)
-
-
-def load_activities() -> List:
-    activities_str = read(ACTIVITIES_FN)
-    if not activities_str:
-        activities_str = '[]'
-    return json.loads(activities_str)
-
-
-activities = load_activities()
-categories = load_categories()
+activities = fh.load_activities()
+categories = fh.load_categories()
 
 
 @app.route('/hello')
@@ -80,19 +45,25 @@ def categories_route():
         return add_category(request.json['name'], request.json['description'], color)
 
     if request.method == 'GET':
-        print(categories)
         return json.dumps(categories)
+
+
+@app.route('/activities/<category>')
+def get_activities_by_category(category: str) -> List[Dict]:
+    global activities
+    activities_for_category = list(filter(lambda activity: activity['category'] == category, activities))
+    return json.dumps(activities_for_category)
 
 
 def add_category(name: str, description: str, color: str):
     category = {"name": name, "description:": description, "color": color}
     categories.append(category)
-    save(CATEGORIES_FN, json.dumps(categories))
+    fh.save(fh.CATEGORIES_FN, json.dumps(categories))
     return category
 
 
 def add_activity(category: str, date: str):
     activity = {"category": category, "date": date}
     activities.append(activity)
-    save(ACTIVITIES_FN, json.dumps(activities))
+    fh.save(fh.ACTIVITIES_FN, json.dumps(activities))
     return activity
