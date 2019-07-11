@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add Activities</title>
+</head>
+<body>
+<section class="container">
+    <div class="m-2 text-primary h3">Add Activity</div>
+
+    <div class="form-group m-2 mt-4">
+        <label class="text-secondary" for="categoriesSelect">Category</label>
+        <select class="form-control" id="categoriesSelect">
+        </select>
+    </div>
+    <div class="m-2 mt-0">
+        <button type="button" class="btn btn-primary w-100" id="openNewCategoryModalBtn">New Category</button>
+    </div>
+
+    <div class="text-secondary ml-2 mr-2 mt-4 mb-0">Date</div>
+    <div class="m-2 d-flex justify-content-center">
+        <div id="datePicker"></div>
+            <input type="hidden" id="datePickerInput">
+    </div>
+
+    <div class="m-2 mt-0">
+        <button type="button" class="btn btn-primary w-100" id="addActivityBtn">Add</button>
+    </div>
+
+    <div class="m-2 mt-0 alert alert-success" role="alert" id="notificationMessageSuccess"></div>
+    <div class="m-2 mt-0 alert alert-danger" role="alert" id="notificationMessageError"></div>
+
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalTitle">Add A Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoryName" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="categoryName">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription" class="col-form-label">Description:</label>
+                            <input type="text" class="form-control" id="categoryDescription">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="addCategoryBtn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="input.bundle.js?ec8a56b119f4bee1816a"></script></body>
+</html>
