@@ -1,4 +1,5 @@
 import json
+import os
 from typing import List, Dict
 
 from flask import Flask, request, send_from_directory
@@ -7,6 +8,7 @@ from flask_cors import CORS
 import file_handler as fh
 
 app = Flask(__name__)
+
 CORS(app)
 
 
@@ -67,3 +69,9 @@ def add_activity(category: str, date: str):
     activities.append(activity)
     fh.save(fh.ACTIVITIES_FN, json.dumps(activities))
     return activity
+
+
+if __name__ == '__main__':
+    print('Hi Calendar')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
