@@ -1,12 +1,1 @@
-[
-  {
-    "name": "sleeping",
-    "description:": "days I went to bed",
-    "color": "100, 240, 100"
-  },
-  {
-    "name": "climbing",
-    "description:": "days spend climbing",
-    "color": "100, 240, 100"
-  }
-]
+[{"name": "sleeping", "description:": "days I went to bed", "color": "100, 240, 100"}, {"name": "climbing", "description:": "days spend climbing", "color": "100, 240, 100"}, {"name": "climbing", "description:": "climbing", "color": "100, 240, 100"}, {"name": "climbing", "description:": "climbing", "color": "100, 240, 100"}, {"name": "reading", "description:": "reading", "color": "100, 240, 100"}]
